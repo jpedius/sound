@@ -1,24 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
 
-function App() {
+import Consonant from './components/Consonant';
+import ConsonantRead from './components/ConsonantRead';
+import Vowel from './components/Vowel';
+import VowelRead from './components/VowelRead';
+import All from './components/All';
+
+function SwitchCase(props) {
+  switch(props.value) {
+    case 'consonant':
+      return <Consonant />
+    case 'consonant-read':
+      return <ConsonantRead />
+    case 'vowel':
+      return <Vowel />
+    case 'vowel-read':
+      return <VowelRead />
+    default:
+      return <All />
+  }
+}
+
+function App(props) {
+
+  const parsedUrl = new URL(window.location.href);
+  const search = parsedUrl.searchParams.get("id");
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <SwitchCase value={search} />
   );
 }
 
